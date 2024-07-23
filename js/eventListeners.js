@@ -4,29 +4,22 @@ const speedDownButton = document.getElementById('slow-down');
 let speedIntervalId;
 
 //actions to speed up
-speedUpButton.addEventListener('mousedown', () => {
+speedUpButton.addEventListener('touchstart', () => {
     speedUp();
     speedIntervalId = setInterval(speedUp, 20);
 });
-speedUpButton.addEventListener('mouseup', () => {
-    clearInterval(speedIntervalId);
-});
-speedUpButton.addEventListener('mouseout', () => {
+speedUpButton.addEventListener('touchend', () => {
     clearInterval(speedIntervalId);
 });
 
 //actions to speed down
-speedDownButton.addEventListener('mousedown', () => {
+speedDownButton.addEventListener('touchstart', () => {
     slowDown()
     speedIntervalId = setInterval(slowDown, 20);
 });
-speedDownButton.addEventListener('mouseup', () => {
+speedDownButton.addEventListener('touchend', () => {
     clearInterval(speedIntervalId);
 });
-speedDownButton.addEventListener('mouseout', () => {
-    clearInterval(speedIntervalId);
-});
-
 
 function speedUp() {
     speed += STEP_UP;
