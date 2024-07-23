@@ -1,164 +1,29 @@
 <!DOCTYPE html>
-<head>
-  <title>Prague spotting</title>
-  <style>
-    body{
-      background-color: whitesmoke;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh; 
-      margin: 0; 
-    }
-    h1{
-      color: rgb(52, 64, 85);
-      font-family: Arial, Helvetica, sans-serif;
-      z-index: 3;
-      background-color: whitesmoke;
-      margin-bottom: 30px;
-      padding: 20px;
-    }
-    label{
-      color: rgb(52, 64, 85);
-      font-family: sans-serif;
-      font-size: small;
-    }
-    .container {
-      width: 90%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: auto;
-    }
-    .event{
-      height: 20px;
-      border-radius: 5px;
-      background-color: rgb(70, 78, 142);
-      color: white;
-      font-family: sans-serif;
-      justify-content: center;
-      align-items: center;
-      display: flex;
-      margin-bottom: 1px;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      padding-left: 0px;
-      padding-right: 0px;
-      z-index: 1;
-    }
-    .events{
-      width: 100%;
-      z-index: 1;
-    }
-    .timeline {
-      width: 100%;
-      height: 5px;
-      border-radius: 12px;
-      background-color: rgb(39, 37, 47);
-      z-index: 1;
-    }
-    .labels{
-      width: 90%;
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-      margin-top: 10px;
-      z-index: 3;
-    }
-    .divider{
-      width: 2px;
-      height: 60%;
-      margin: 0px;
-      z-index: 2;
-      background-color: red;
-      position: absolute;
-      left: 0;
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-  </style>
-</head>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div class="logo-div">
 
-<body>
-  <h1>Letiště Praha</h1>
-  <div class="divider" id="timer"></div>
-  <div class="container">
-    <div class="events">
-        <!-- Zde můžete přidat obsah vašich událostí
-        15.08.2023 	Boeing 767-300 	Delta Air Lines JFK/JFK 	10:00 / 12:10 	
-        15.08.2023 	Boeing 777-300 	Emirates DXB/DXB 	13:00 / 15:45 	
-        15.08.2023 	Airbus A310 	ULS Airlines Cargo (o/f Turkish Airlines) ISL/ISL 	17:05 / 18:35 
-        -->
-        <div class="event" style="margin-left: 28.571428571428571428571428571429%; width: 14.285714285714285714285714285714%;">
-          B 767-300
+    </div>
+
+    <div class="start-level-div">
+        <div class="level-div">
+            <div class="level-text">
+                LEVEL
+            </div>
+            <div class="number-text">
+                13
+            </div>
         </div>
-        <div class="event" style="margin-left: 42.857142857142857142857142857143%; width: 19.642857142857142857142857142857%;">
-          B 777-300
-        </div>
-        <div class="event" style="margin-left: 78.571428571428571428571428571429%; width: 10.714285714285714285714285714286%;">
-          A 310 Cargo
+        <div class="start">
+            <button>
+                START
+            </button>
         </div>
     </div>
-    <div class="timeline"></div>
-  </div>
-  <div class="labels">
-    <label>06</label>
-    <label>07:00</label>
-    <label>08:00</label>
-    <label>09:00</label>
-    <label>10:00</label>
-    <label>11:00</label>
-    <label>12:00</label>
-    <label>13:00</label>
-    <label>14:00</label>
-    <label>15:00</label>
-    <label>16:00</label>
-    <label>17:00</label>
-    <label>18:00</label>
-    <label>19:00</label>
-    <label>20</label>
-  </div> 
-
-  <script>
-    function timeLine(){
-      const element = document.getElementById("timer");
-      var timeNow = new Date();
-      var todayHours = timeNow.getHours();  //int
-      var todayMin = timeNow.getMinutes();  //int
-
-      let result = ((todayHours - 6) * 6.4285714285714285714285714285714) + (todayMin * 0.10714285714285714285714285714286) + 5;
-
-      if (result > 90) {
-        result = 95;
-      }
-      if (result < 5) {
-        result = 5;
-      }
-
-      var resString = result.toString() + "%";
-    
-      element.style.marginLeft = resString;
-    }
-
-    timeLine();
-    setInterval(timeLine, 60000);    
-  </script>
-
-</body>
-<!--
-  výpočet %:
-   6-20 = 14 hodin 
-   14hodin = 100%
-   -> 1 hodina = 7.1428571428571428571428571428571%
-
-  výpočet % pro |:
-   5% ---- 14 míst ---- 5%
-   90% / 14 = 6.42857%
-   ... 5 + 6.42857% = margin-left
-
-   6.4285714285714285714285714285714% - 1 hodina   + 5% margin
-   0.10714285714285714285714285714286% - 1 minuta   + 5% margin
--->
+  </body>
 </html>

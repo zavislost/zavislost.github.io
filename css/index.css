@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/OpenSans-Medium.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    display: flex;
+    background-color: #EFEFEF;
+    height: 100vh;
+}
+
+button {
+    font-family: 'Open Sans';
+    font-size: 5vh;
+    color: #2A2E36;
+}
+
+.logo-div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-level-div {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.level-div {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number-text {
+    font-family: 'Open Sans';
+    font-size: 13vh;
+    color: #2A2E36;
+}
+
+.level-text {
+    font-family: 'Open Sans';
+    font-size: 8vh;
+    color: #2A2E36;
+    line-height: 5vh;
+}
+
+.start {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
