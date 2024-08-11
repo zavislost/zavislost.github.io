@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celá obrazovka</title>
+</head>
+<body>
+    <button onclick="goFullscreen()">Celá obrazovka</button>
+
+    <script>
+        function goFullscreen() {
+            const elem = document.documentElement; // Vybere celý dokument
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Pro Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Pro Chrome, Safari a Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // Pro Internet Explorer a Edge
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
