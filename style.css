@@ -58,10 +58,12 @@ button {
     background-color: rgba(0, 0, 0, 0.213);
     color: white;
     font-size: xx-large;
+    touch-action: manipulation;
 }
 
 button:active {
     background-color: rgba(0, 0, 0, 0.743);
+    touch-action: manipulation;
 }
 
 .friend {
