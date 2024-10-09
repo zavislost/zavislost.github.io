@@ -39,7 +39,8 @@ function toStart() {
 
 arrowUp.addEventListener('click', () => {
     info.style.display = 'none'
-
+    obstacle.style.display = 'inlline-block';
+    
     let friendBounds = friend.getBoundingClientRect();
     let obstacleBounds = obstacle.getBoundingClientRect();
     let jazzBounds = jazz.getBoundingClientRect();
@@ -59,6 +60,7 @@ arrowUp.addEventListener('click', () => {
 
 arrowLeft.addEventListener('click', () => {
     info.style.display = 'none'
+    obstacle.style.display = 'inlline-block';
 
     let friendBounds = friend.getBoundingClientRect();
     let obstacleBounds = obstacle.getBoundingClientRect();
@@ -79,7 +81,8 @@ arrowLeft.addEventListener('click', () => {
 
 arrowRight.addEventListener('click', () => {
     info.style.display = 'none'
-
+    obstacle.style.display = 'inlline-block';
+    
     let friendBounds = friend.getBoundingClientRect();
     let obstacleBounds = obstacle.getBoundingClientRect();
     let jazzBounds = jazz.getBoundingClientRect();
@@ -99,6 +102,7 @@ arrowRight.addEventListener('click', () => {
 
 arrowDown.addEventListener('click', () => {
     info.style.display = 'none'
+    obstacle.style.display = 'inlline-block';
 
     let friendBounds = friend.getBoundingClientRect();
     let obstacleBounds = obstacle.getBoundingClientRect();
