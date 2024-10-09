@@ -76,7 +76,6 @@ button:active {
 
 .obstacle {
     height: 18vh;
-    display: none;
     position: absolute;
     top: 60%;  
     left: 50%;
