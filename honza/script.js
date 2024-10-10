@@ -25,7 +25,7 @@ function youWon() {
     jazz.style.display = 'none'
     friend.style.display = 'none'
     obstacle.style.display = 'none'
-    info.textContent = "Já věděl že to najdeš. Tak jo, domluvíme to a jdem. Ještě jednou děkuji."
+    info.textContent = "Já věděl že to najdeš. Musíme tam zajít. Kámo mockrát děkuji za přání. Ještě jednou děkuji a užívej."
     info.style.display = 'block'
 }
 
