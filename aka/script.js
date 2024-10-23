@@ -19,7 +19,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
         ctx.font = "normal 42px Calibri, Arial, sans-serif";
         ctx.fillStyle = "rgb(0, 0, 0)";
-        ctx.fillText(selectedTeam, 533, 367);
+        ctx.fillText(selectedTeam, 531, 367);
         ctx.font = "normal 35px Calibri, Arial, sans-serif";
         ctx.fillText(formatDate(selectedDate), 516, 416);
       
