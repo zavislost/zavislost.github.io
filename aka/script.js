@@ -20,7 +20,9 @@ document.getElementById('generate-button').addEventListener('click', function() 
         ctx.font = "normal 42px Calibri, Arial, sans-serif";
         ctx.fillStyle = "rgb(0, 0, 0)";
         ctx.fillText(selectedTeam, 533, 367);
-
+        ctx.font = "normal 35px Calibri, Arial, sans-serif";
+        ctx.fillText(selectedDate, 519, 415);
+      
         container.style.display = 'none';
         outputImageDiv.src = canvas.toDataURL();
         outputImageDiv.style.display = 'block';
