@@ -17,7 +17,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
-        ctx.font = "normal 42px Calibri";
+        ctx.font = "normal 42px Calibri, Arial, sans-serif";
         ctx.fillStyle = "rgb(0, 0, 0)";
         ctx.fillText(selectedTeam, 533, 367);
 
