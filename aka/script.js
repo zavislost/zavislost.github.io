@@ -19,7 +19,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
         ctx.font = "normal 42px Calibri";
         ctx.fillStyle = "rgb(0, 0, 0)";
-        ctx.fillText(selectedTeam, 533, 366);
+        ctx.fillText(selectedTeam, 533, 367);
 
         container.style.display = 'none';
         outputImageDiv.src = canvas.toDataURL();
