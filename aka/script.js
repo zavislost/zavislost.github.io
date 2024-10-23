@@ -31,6 +31,6 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
 function formatDate(dateString) {
     const parts = dateString.split("-");
-    return `${parts[0]}. ${parts[1]}. ${parts[2]}`;
+    return `${parts[2]}.${parts[1]}.${parts[0]}`;
 }
 
