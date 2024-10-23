@@ -17,9 +17,9 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
-        ctx.font = "bold 48px Arial";
+        ctx.font = "normal 42px Calibri";
         ctx.fillStyle = "rgb(0, 0, 0)";
-        ctx.fillText("Iced Coffee", 30, 220);
+        ctx.fillText(selectedTeam, 502, 336);
 
         container.style.display = 'none';
         outputImageDiv.src = canvas.toDataURL();
