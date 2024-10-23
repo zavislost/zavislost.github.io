@@ -21,7 +21,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
         ctx.fillStyle = "rgb(0, 0, 0)";
         ctx.fillText(selectedTeam, 533, 367);
         ctx.font = "normal 35px Calibri, Arial, sans-serif";
-        ctx.fillText(selectedDate, 519, 415);
+        ctx.fillText(selectedDate, 519, 416);
       
         container.style.display = 'none';
         outputImageDiv.src = canvas.toDataURL();
