@@ -94,3 +94,9 @@ path {
     justify-content: center;
     align-items: center;
 }
+
+.pedal {
+    height: 80px;
+    margin:8px;
+    width: 60px;
+}
