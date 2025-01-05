@@ -8,6 +8,7 @@ body {
     display: flex;
     background-color: #EFEFEF;
     height: 100vh;
+    touch-action: manipulation;
 }
 
 svg {
