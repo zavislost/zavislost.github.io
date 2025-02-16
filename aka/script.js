@@ -9,7 +9,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
     img.src = 'img/akaTicket.png';
 
     img.onload = function() {
-      document.fonts.ready.then(() => {
+    
         let canvas = document.createElement("canvas");
         let ctx = canvas.getContext("2d");
 
@@ -27,7 +27,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
         container.style.display = 'none';
         outputImageDiv.src = canvas.toDataURL();
         outputImageDiv.style.display = 'block';
-        )};
+      
     };
 });
 
