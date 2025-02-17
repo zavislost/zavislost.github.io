@@ -43,6 +43,7 @@ canvas {
     width: auto; 
     height: 100%; 
     display: block;
+    font-family: 'Open Sans'
 }
 
 select, input[type="date"] {
