@@ -38,12 +38,9 @@ function formatDate(dateString) {
 
 window.onload = function() {
     console.log("START");
-    const font = new FontFace("Open Sans", "url('fonts/OpenSans-Medium.woff2') format('woff2')");
-    
-    font.load().then(function(loadedFont) {
-        document.fonts.add(loadedFont);
-        console.log("Font je načtený a připravený k použití.");
-        
+
+    document.fonts.ready.then(function() {
+        console.log("Fonty jsou načtené a připravené k použití.");
     }).catch(function(error) {
         console.error("Chyba při načítání fontu:", error);
     });
