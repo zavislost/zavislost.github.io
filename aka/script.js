@@ -17,7 +17,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
         console.log("Načítání");
-        document.font.ready.then(() => {
+        document.fonts.ready.then(() => {
           console.log("načítání-font");
           ctx.font = "normal 36px 'Open Sans'";  
         });
