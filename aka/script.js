@@ -8,36 +8,35 @@ document.getElementById('generate-button').addEventListener('click', function() 
     var img = new Image();
     img.src = 'img/akaTicket.png';
 
-    window.onload = function() {
-    console.log("START01");
-
+    // Načtení fontů
     document.fonts.ready.then(function() {
         console.log("Fonty jsou načtené a připravené k použití.");
+
+        // Po načtení fontů a obrázku
+        img.onload = function() {
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+
+            ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+
+            ctx.font = "normal 36px 'Open Sans'";
+            ctx.fillStyle = "rgb(0, 0, 0)";
+            ctx.fillText(selectedTeam, 529, 368);
+            ctx.font = "normal 31px 'Open Sans'";
+            ctx.fillText(formatDate(selectedDate), 514, 416);
+
+            container.style.display = 'none';
+            outputImageDiv.src = canvas.toDataURL();
+            outputImageDiv.style.display = 'block';
+        };
+
     }).catch(function(error) {
         console.error("Chyba při načítání fontu:", error);
     });
 
-    img.onload = function() {
-    
-        let canvas = document.createElement("canvas");
-        let ctx = canvas.getContext("2d");
-
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-
-        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-
-        ctx.font = "normal 36px 'Open Sans'";
-        ctx.fillStyle = "rgb(0, 0, 0)";
-        ctx.fillText(selectedTeam, 529, 368);
-        ctx.font = "normal 31px 'Open Sans'";
-        ctx.fillText(formatDate(selectedDate), 514, 416);
-      
-        container.style.display = 'none';
-        outputImageDiv.src = canvas.toDataURL();
-        outputImageDiv.style.display = 'block';
-      }; 
-    };
 });
 
 function formatDate(dateString) {
@@ -45,6 +44,4 @@ function formatDate(dateString) {
     return `${parts[2]}.${parts[1]}.${parts[0]}`;
 }
 
-
 console.log("JEDEM");
-
