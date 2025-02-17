@@ -36,3 +36,16 @@ function formatDate(dateString) {
     return `${parts[2]}.${parts[1]}.${parts[0]}`;
 }
 
+window.onload = function() {
+    const font = new FontFace("Open Sans", "url('fonts/OpenSans-Regular.woff2') format('woff2')");
+    
+    font.load().then(function(loadedFont) {
+        document.fonts.add(loadedFont);
+        console.log("Font je načtený a připravený k použití.");
+        
+    }).catch(function(error) {
+        console.error("Chyba při načítání fontu:", error);
+    });
+};
+
+
