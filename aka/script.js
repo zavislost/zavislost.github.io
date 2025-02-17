@@ -8,6 +8,15 @@ document.getElementById('generate-button').addEventListener('click', function() 
     var img = new Image();
     img.src = 'img/akaTicket.png';
 
+    window.onload = function() {
+    console.log("START01");
+
+    document.fonts.ready.then(function() {
+        console.log("Fonty jsou načtené a připravené k použití.");
+    }).catch(function(error) {
+        console.error("Chyba při načítání fontu:", error);
+    });
+
     img.onload = function() {
     
         let canvas = document.createElement("canvas");
@@ -27,7 +36,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
         container.style.display = 'none';
         outputImageDiv.src = canvas.toDataURL();
         outputImageDiv.style.display = 'block';
-      
+      }; 
     };
 });
 
@@ -36,15 +45,6 @@ function formatDate(dateString) {
     return `${parts[2]}.${parts[1]}.${parts[0]}`;
 }
 
-window.onload = function() {
-    console.log("START01");
-
-    document.fonts.ready.then(function() {
-        console.log("Fonty jsou načtené a připravené k použití.");
-    }).catch(function(error) {
-        console.error("Chyba při načítání fontu:", error);
-    });
-};
 
 console.log("JEDEM");
 
