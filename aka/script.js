@@ -16,9 +16,11 @@ document.getElementById('generate-button').addEventListener('click', function() 
         canvas.height = img.naturalHeight;
 
         ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-
-        // Nastavení fontu (může být i defaultní, pokud používáte fonty už připojené v HTML)
-        ctx.font = "normal 36px 'Open Sans'";  // Předpokládáme, že font je načtený v HTML
+        console.log("Načítání");
+        document.font.ready.then(() => {
+          console.log("načítání-font");
+          ctx.font = "normal 36px 'Open Sans'";  
+        });
         ctx.fillStyle = "rgb(0, 0, 0)";
         ctx.fillText(selectedTeam, 529, 368);
         ctx.font = "normal 31px 'Open Sans'";
