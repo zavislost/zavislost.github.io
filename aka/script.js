@@ -37,7 +37,7 @@ function formatDate(dateString) {
 }
 
 window.onload = function() {
-    console.log("START");
+    console.log("START01");
 
     document.fonts.ready.then(function() {
         console.log("Fonty jsou načtené a připravené k použití.");
