@@ -37,6 +37,7 @@ function formatDate(dateString) {
 }
 
 window.onload = function() {
+    console.log("START");
     const font = new FontFace("Open Sans", "url('fonts/OpenSans-Regular.woff2') format('woff2')");
     
     font.load().then(function(loadedFont) {
@@ -48,4 +49,5 @@ window.onload = function() {
     });
 };
 
+console.log("JEDEM");
 
