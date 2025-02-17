@@ -8,34 +8,26 @@ document.getElementById('generate-button').addEventListener('click', function() 
     var img = new Image();
     img.src = 'img/akaTicket.png';
 
-    // Načtení fontů
-    document.fonts.ready.then(function() {
-        console.log("Fonty jsou načtené a připravené k použití.");
+    img.onload = function() {
+        let canvas = document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
 
-        // Po načtení fontů a obrázku
-        img.onload = function() {
-            let canvas = document.createElement("canvas");
-            let ctx = canvas.getContext("2d");
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
 
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
+        ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
-            ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+        // Nastavení fontu (může být i defaultní, pokud používáte fonty už připojené v HTML)
+        ctx.font = "normal 36px 'Open Sans'";  // Předpokládáme, že font je načtený v HTML
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.fillText(selectedTeam, 529, 368);
+        ctx.font = "normal 31px 'Open Sans'";
+        ctx.fillText(formatDate(selectedDate), 514, 416);
 
-            ctx.font = "normal 36px 'Open Sans'";
-            ctx.fillStyle = "rgb(0, 0, 0)";
-            ctx.fillText(selectedTeam, 529, 368);
-            ctx.font = "normal 31px 'Open Sans'";
-            ctx.fillText(formatDate(selectedDate), 514, 416);
-
-            container.style.display = 'none';
-            outputImageDiv.src = canvas.toDataURL();
-            outputImageDiv.style.display = 'block';
-        };
-
-    }).catch(function(error) {
-        console.error("Chyba při načítání fontu:", error);
-    });
+        container.style.display = 'none';
+        outputImageDiv.src = canvas.toDataURL();
+        outputImageDiv.style.display = 'block';
+    };
 
 });
 
