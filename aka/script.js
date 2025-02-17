@@ -20,15 +20,16 @@ document.getElementById('generate-button').addEventListener('click', function() 
         document.fonts.ready.then(() => {
           console.log("načítání-font");
           ctx.font = "normal 36px 'Open Sans'";  
-        });
-        ctx.fillStyle = "rgb(0, 0, 0)";
-        ctx.fillText(selectedTeam, 529, 368);
-        ctx.font = "normal 31px 'Open Sans'";
-        ctx.fillText(formatDate(selectedDate), 514, 416);
+          ctx.fillStyle = "rgb(0, 0, 0)";
+          ctx.fillText(selectedTeam, 529, 368);
+          ctx.font = "normal 31px 'Open Sans'";
+          ctx.fillText(formatDate(selectedDate), 514, 416);
 
-        container.style.display = 'none';
-        outputImageDiv.src = canvas.toDataURL();
-        outputImageDiv.style.display = 'block';
+          console.log("načítání-font2");
+          container.style.display = 'none';
+          outputImageDiv.src = canvas.toDataURL();
+          outputImageDiv.style.display = 'block';
+        }); 
     };
 
 });
