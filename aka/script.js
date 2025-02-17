@@ -38,7 +38,7 @@ function formatDate(dateString) {
 
 window.onload = function() {
     console.log("START");
-    const font = new FontFace("Open Sans", "url('fonts/OpenSans-Regular.woff2') format('woff2')");
+    const font = new FontFace("Open Sans", "url('fonts/OpenSans-Medium.woff2') format('woff2')");
     
     font.load().then(function(loadedFont) {
         document.fonts.add(loadedFont);
