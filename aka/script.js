@@ -10,12 +10,9 @@ document.getElementById('generate-button').addEventListener('click', function() 
         // Zobrazit obrázek místo canvas
         const img = new Image();
         img.src = 'img/VSE.png';  // Sem dejte cestu k obrázku, který chcete zobrazit
-        console.log("JO");
 
         img.onload = function() {
             outputImageDiv.src = img.src;
-            console.log("JO2");
-            console.log(img);
             container.style.display = 'none';
             outputImageDiv.style.display = 'block';
         };
