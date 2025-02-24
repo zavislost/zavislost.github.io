@@ -1,7 +1,7 @@
 document.getElementById('generate-button').addEventListener('click', function() {
   
     const selectedTeam = document.getElementById('team-select').value;
-    const selectedDate = document.getElementById('date-input').value;
+    //const selectedDate = document.getElementById('date-input').value;
     const outputImageDiv = document.getElementById('imageFullScreen');
     const container = document.getElementById('container');
 
@@ -32,6 +32,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
             ctx.fillStyle = "rgb(0, 0, 0)";
             ctx.fillText(selectedTeam, 529, 368);
             ctx.font = "normal 31px 'Open Sans'";
+            selectedDate = "24-02-2025";
             ctx.fillText(formatDate(selectedDate), 514, 416);
 
             container.style.display = 'none';
