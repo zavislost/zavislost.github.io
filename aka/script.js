@@ -6,10 +6,10 @@ document.getElementById('generate-button').addEventListener('click', function() 
     const container = document.getElementById('container');
 
     // Pokud je vybrán konkrétní tým, zobrazíme obrázek místo vykreslení na canvas
-    if (selectedTeam === "NějakýSpecifickýTým") {
+    if (selectedTeam === "VŠE Falcons Prague") {
         // Zobrazit obrázek místo canvas
         const img = new Image();
-        img.src = 'img/obrazekNamistoCanvas.png';  // Sem dejte cestu k obrázku, který chcete zobrazit
+        img.src = 'img/VSE.png';  // Sem dejte cestu k obrázku, který chcete zobrazit
 
         img.onload = function() {
             outputImageDiv.src = img.src;
