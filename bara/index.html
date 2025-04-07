@@ -111,6 +111,52 @@ Console.Write(nejlepšíUNI);
 Console.Write(", Průměr SAT: ");
 Console.WriteLine(nejvyššíSAT);
 
+//----------------------------------------------------------------------------------------------------
+// Úkol 4 - Spočítat úspěšnost odpromování pro každou univerzitu v roce 2000 a najít nejhorší
+string nejhoreiUNI = null;
+double nejnizšiCislo = double.MaxValue;
+
+
+for (int i = 1; i < ulozeneRadky.Count; i++)  
+{
+    string rok = ulozeneRadky[i][0];  // Rok
+    string univerzita = ulozeneRadky[i][1];  // Univerzita
+
+   
+    if (rok == "2000")
+    {
+        // Načteme počty studentů a odpromovaných studentů pro jednotlivé stupně
+        int studentiBakalari = int.Parse(ulozeneRadky[i][2]);  // Studenti_Bakalář
+        int studentiMagistr = int.Parse(ulozeneRadky[i][3]);   // Studenti_Magistr
+        int studentiDoktorat = int.Parse(ulozeneRadky[i][4]);  // Studenti_Doktorát
+
+        int odpromovanoBakalari = int.Parse(ulozeneRadky[i][5]);  // Odpromováno_Bakalář
+        int odpromovanoMagistr = int.Parse(ulozeneRadky[i][6]);   // Odpromováno_Magistr
+        int odpromovanoDoktorat = int.Parse(ulozeneRadky[i][7]);  // Odpromováno_Doktorát
+
+        // Celkový počet studentů a celkový počet odpromovaných studentů
+        int celkoveStudenti = studentiBakalari + studentiMagistr + studentiDoktorat;
+        int celkoveOdpromovano = odpromovanoBakalari + odpromovanoMagistr + odpromovanoDoktorat;
+
+        // Spočítáme úspěšnost odpromování
+        double uspech = (double)celkoveOdpromovano / celkoveStudenti;
+
+        // Porovnáme, zda je toto skóre nižší než dosavadní nejnižší
+        if (uspech < nejnizšiCislo)
+        {
+            nejnizšiCislo = uspech;
+            nejhoreiUNI = univerzita;
+        }
+    }
+}
+
+Console.Write("Nejhorší univerzita je: ");
+Console.Write(nejhoreiUNI);
+Console.Write(", Hodnota úspěšnosti: ");
+Console.WriteLine(nejnizšiCislo);
+
+
+
     </code></pre>
 </body>
 </html>
