@@ -156,63 +156,63 @@ Console.Write(", Hodnota úspěšnosti: ");
 Console.WriteLine(nejnizšiCislo);
 
 
- List<string> univerzity = new List<string>();
-        List<decimal> publikaceTotal = new List<decimal>();  // Celkový součet publikací pro každou univerzitu
-        List<int> rokyCount = new List<int>();  // Počet let, ve kterých se univerzita objevuje
+            //task 5
+List<string> univerzity = new List<string>();
+    List<double> publikaceTotal = new List<double>();  // Celkový součet publikací pro každou univerzitu
+    List<int> rokyCount = new List<int>();  // Počet let, ve kterých se univerzita objevuje
 
-        // Procházíme všechny řádky a sbíráme data pro každou univerzitu
-        for (int i = 1; i < ulozeneRadky.Count; i++)  // Začínáme od 1, protože 0. řádek je záhlaví
+    // Procházíme všechny řádky a sbíráme data pro každou univerzitu
+    for (int i = 1; i < ulozeneRadky.Count; i++)  // Začínáme od 1, protože 0. řádek je záhlaví
+    {
+        string univerzita = ulozeneRadky[i][1].Trim();  // Univerzita
+        double publikace;  // Publikace (12. sloupec)
+
+        // Ujistíme se, že hodnoty pro publikace mají správný formát (pokud je čárka, přetvoříme ji na tečku)
+        string publikaceString = ulozeneRadky[i][12].Trim();
+        publikaceString = publikaceString.Replace('.', ',');  // Pokud je čárka, nahradíme ji tečkou
+
+        // Pokusíme se převést hodnotu publikace na double, protože může obsahovat desetinné číslo
+        if (double.TryParse(publikaceString, out publikace))
         {
-            string univerzita = ulozeneRadky[i][1].Trim();  // Univerzita
-            decimal publikace;  // Publikace (12. sloupec)
-
-            // Ujistíme se, že hodnoty pro publikace mají správný formát (pokud je čárka, přetvoříme ji na tečku)
-            string publikaceString = ulozeneRadky[i][12].Trim();
-            publikaceString = publikaceString.Replace(',', '.');  // Pokud je čárka, nahradíme ji tečkou
-
-            // Pokusíme se převést hodnotu publikace na decimal, protože může obsahovat velmi velká čísla
-            if (decimal.TryParse(publikaceString, out publikace))
+            // Pokud univerzita ještě není v seznamu, přidáme ji
+            int index = univerzity.IndexOf(univerzita);
+            if (index == -1)
             {
-                // Pokud univerzita ještě není v seznamu, přidáme ji
-                int index = univerzity.IndexOf(univerzita);
-                if (index == -1)
-                {
-                    univerzity.Add(univerzita);
-                    publikaceTotal.Add(publikace);
-                    rokyCount.Add(1);
-                }
-                else
-                {
-                    // Aktualizujeme součet publikací a počet let pro tuto univerzitu
-                    publikaceTotal[index] += publikace;
-                    rokyCount[index] += 1;
-                }
+                univerzity.Add(univerzita);
+                publikaceTotal.Add(publikace);
+                rokyCount.Add(1);
             }
             else
             {
-                Console.WriteLine($"Nelze převést publikace na číslo: {publikaceString}");
+                // Aktualizujeme součet publikací a počet let pro tuto univerzitu
+                publikaceTotal[index] += publikace;
+                rokyCount[index] += 1;
             }
         }
-
-        // Seřadíme univerzity podle průměrného počtu publikací
-        var sortedUniversities = new List<(string University, decimal AveragePublications)>();
-
-        for (int i = 0; i < univerzity.Count; i++)
+        else
         {
-            decimal averagePublications = publikaceTotal[i] / rokyCount[i];
-            sortedUniversities.Add((univerzity[i], averagePublications));
+            Console.WriteLine($"Nelze převést publikace na číslo: {publikaceString}");
         }
+    }
 
-        // Seřadíme podle průměrného počtu publikací sestupně
-        sortedUniversities = sortedUniversities.OrderByDescending(uni => uni.AveragePublications).ToList();
+    // Seřadíme univerzity podle průměrného počtu publikací
+    var sortedUniversities = new List<(string University, double AveragePublications)>();
 
-        // Vypíšeme seznam univerzit a jejich průměrný počet publikací
-        Console.WriteLine("Seznam univerzit seřazený podle průměrného počtu publikací:");
-        foreach (var uni in sortedUniversities)
-        {
-            Console.WriteLine($"{uni.University}: {uni.AveragePublications:F2} publikací na rok");
-        }
+    for (int i = 0; i < univerzity.Count; i++)
+    {
+        double averagePublications = publikaceTotal[i] / rokyCount[i];
+        sortedUniversities.Add((univerzity[i], averagePublications));
+    }
 
+    // Seřadíme podle průměrného počtu publikací sestupně
+    sortedUniversities = sortedUniversities.OrderByDescending(uni => uni.AveragePublications).ToList();
+
+    // Vypíšeme seznam univerzit a jejich průměrný počet publikací
+    Console.WriteLine("Seznam univerzit seřazený podle průměrného počtu publikací:");
+    foreach (var uni in sortedUniversities)
+    {
+        Console.WriteLine($"{uni.University}: {uni.AveragePublications:F2} publikací na rok");
+    }
 
 
     </code></pre>
