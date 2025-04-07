@@ -25,96 +25,92 @@
 </head>
 <body>
     <h1>Kód:</h1>
-    <pre><code>public static void Main()
+    <pre><code>
+        
+
+
+string cestaSouboru = @"D:\BÁRA\informatika\UNI_stats.csv";
+
+if (!File.Exists(cestaSouboru)) 
 {
-    // 1. Násobení Matic
-    Console.WriteLine("1. Násobení matic:");
-    int[,] A = { { 2, 3, 5 }, { 4, 3, 2 }, { 5, 2, 1 }, { 3, 1, 4 } };
-    int[,] B = { { 1 }, { 2 }, { 3 } };
-    int[,] C = new int[A.GetLength(0), B.GetLength(1)];
+    Console.WriteLine("Soubor není - zadala jsem špatnou cestu");
+    return;
+}
 
-    for (int i = 0; i < A.GetLength(0); i++)
+List<string[]> ulozeneRadky = new List<string[]>();
+
+using (StreamReader sr = new StreamReader(cestaSouboru))
+{
+    string radek;
+    while ((radek = sr.ReadLine()) != null)
     {
-        for (int j = 0; j < B.GetLength(1); j++)
+        string[] columns = radek.Split(',');
+        columns[0] = columns[0].Trim('"');
+        ulozeneRadky.Add(columns);
+    }
+}
+
+
+//task 2 - pocet odpromovaných studentu Yale a Pricenton 2000-2005 = odpormovánío_bkalaář + odpromováno_ing + odpormováno_doktorat
+int pocetOdpromovanych = 0;
+
+for (int i = 1; i < ulozeneRadky.Count; i++)
+{
+     
+    string rok = ulozeneRadky[i][0];  // Rok
+    string univerzita = ulozeneRadky[i][1];  // Univerzita
+    int odpromovanoBakalarsky = int.Parse(ulozeneRadky[i][5]);  // Odpromováno Bakalář
+    int odpromovanoMagistr = int.Parse(ulozeneRadky[i][6]);  // Odpromováno Magistr
+    int odpromovanoDoktorat = int.Parse(ulozeneRadky[i][7]);  // Odpromováno Doktorát
+
+
+    if ((univerzita == "Yale" || univerzita == "Princeton") && int.Parse(rok) >= 2000 && int.Parse(rok) <= 2005)
+    {
+        pocetOdpromovanych += odpromovanoBakalarsky + odpromovanoMagistr + odpromovanoDoktorat;
+    }
+    
+}
+
+Console.Write("Počet odpromovaných je: ");
+Console.WriteLine(pocetOdpromovanych);
+
+
+//task 3
+string nejlepšíUNI = null;
+double nejvyššíSAT = -1;
+
+for (int i = 1; i < ulozeneRadky.Count; i++)  
+{
+    string rok = ulozeneRadky[i][0];  // Rok
+    string univerzita = ulozeneRadky[i][1];  // Univerzita
+
+    if (int.Parse(rok) >= 2000 && int.Parse(rok) <= 2010)
+    {
+
+        int satPrirVedy = int.Parse(ulozeneRadky[i][8].Trim());  // SAT_přírodní_vědy
+        int satPravo = int.Parse(ulozeneRadky[i][9].Trim());     // SAT_právo
+        int satMedicina = int.Parse(ulozeneRadky[i][10].Trim()); // SAT_medicína
+        int satSocialniVedy = int.Parse(ulozeneRadky[i][11].Trim()); // SAT_sociální_vědy
+
+        int soucetSAT = satPrirVedy + satPravo + satMedicina + satSocialniVedy;
+
+        // Průměrné SAT skóre pro tuto univerzitu
+        double pprumerSAT = soucetSAT / 4.0;  // Počet oborů je 4
+
+        // Porovnáme, zda je toto skóre vyšší než dosavadní nejlepší
+        if (pprumerSAT > nejvyššíSAT)
         {
-            C[i, j] = 0;
-            for (int k = 0; k < A.GetLength(1); k++)
-            {
-                C[i, j] += A[i, k] * B[k, j];
-            }
-            Console.Write(C[i, j] + " ");
+            nejvyššíSAT = pprumerSAT;
+            nejlepšíUNI = univerzita;
         }
-        Console.WriteLine();
     }
+}
 
-    // 2. Výpočet Faktoriálu
-    Console.WriteLine("\n2. Výpočet faktoriálu:");
-    Console.Write("Zadejte číslo pro výpočet faktoriálu: ");
-    int n = int.Parse(Console.ReadLine());
-    int faktorial = 1;
+Console.Write("Nejlepší univerzita je: ");
+Console.Write(nejlepšíUNI);
+Console.Write(", Průměr SAT: ");
+Console.WriteLine(nejvyššíSAT);
 
-    for (int i = 1; i <= n; i++)
-    {
-        faktorial *= i;
-    }
-    Console.WriteLine("Faktoriál čísla " + n + " je: " + faktorial);
-
-    // 3. Průměr a Směrodatná Odchylka
-    Console.WriteLine("\n3. Průměr a směrodatná odchylka:");
-    Random rand = new Random();
-    int[] pole = new int[100];
-    int soucet = 0;
-
-    for (int i = 0; i < pole.Length; i++)
-    {
-        pole[i] = rand.Next(1, 101);
-        soucet += pole[i];
-    }
-
-    double prumer = soucet / (double)pole.Length;
-    Console.WriteLine("Průměr: " + prumer);
-
-    double sumaOdchylek = 0;
-    for (int i = 0; i < pole.Length; i++)
-    {
-        sumaOdchylek += Math.Pow(pole[i] - prumer, 2);
-    }
-    double smerodatnaOdchylka = Math.Sqrt(sumaOdchylek / pole.Length);
-    Console.WriteLine("Směrodatná odchylka: " + smerodatnaOdchylka);
-
-    // 4. Vytvoření Pole se Slovem
-    Console.WriteLine("\n4. Vytvoření pole se slovem:");
-    Console.Write("Zadejte slovo: ");
-    string slovo = Console.ReadLine();
-    Console.Write("Zadejte počet míst v poli: ");
-    int pocet = int.Parse(Console.ReadLine());
-    string[] poleSlov = new string[pocet];
-
-    for (int i = 0; i < poleSlov.Length; i++)
-    {
-        poleSlov[i] = slovo;
-        Console.WriteLine("Prvek " + i + ": " + poleSlov[i]);
-    }
-
-    // 5. Jednoduchý Kalkulátor
-    Console.WriteLine("\n5. Jednoduchý kalkulátor:");
-    Console.Write("Zadejte první číslo (X): ");
-    double x = double.Parse(Console.ReadLine());
-    Console.Write("Zadejte druhé číslo (Y): ");
-    double y = double.Parse(Console.ReadLine());
-    Console.Write("Zadejte operaci (+, -, *, /): ");
-    string operace = Console.ReadLine();
-
-    if (operace == "PLUS")
-        Console.WriteLine("Výsledek: " + (x + y));
-    else if (operace == "MINUS")
-        Console.WriteLine("Výsledek: " + (x - y));
-    else if (operace == "KRAT")
-        Console.WriteLine("Výsledek: " + (x * y));
-    else if (operace == "DELENO")
-        Console.WriteLine("Výsledek: " + (x / y));
-    else
-        Console.WriteLine("Neplatná operace.");
-}</code></pre>
+    </code></pre>
 </body>
 </html>
