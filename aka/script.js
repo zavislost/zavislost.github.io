@@ -33,7 +33,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
             ctx.fillText(selectedTeam,222, 368);
             ctx.font = "normal 31px 'Open Sans'";
             selectedDate = "2025-03-06";
-            ctx.fillText(formatDate(selectedDate), 514, 416);
+            ctx.fillText(formatDate(selectedDate), 346, 416);
 
             container.style.display = 'none';
             outputImageDiv.src = canvas.toDataURL();
@@ -46,4 +46,5 @@ function formatDate(dateString) {
     const parts = dateString.split("-");
     return `${parts[2]}.${parts[1]}.${parts[0]}`;
 }
+
 
