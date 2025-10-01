@@ -18,7 +18,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
         };
     } else {
         var img = new Image();
-        img.src = 'img/akaTicket.png';
+        img.src = 'img/akaVstupenka2025.png';
 
         img.onload = function() {
             let canvas = document.createElement("canvas");
@@ -30,7 +30,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
             ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
             ctx.font = "normal 36px 'Open Sans'";  
             ctx.fillStyle = "rgb(0, 0, 0)";
-            ctx.fillText(selectedTeam, 529, 368);
+            ctx.fillText(selectedTeam,222, 368);
             ctx.font = "normal 31px 'Open Sans'";
             selectedDate = "2025-03-06";
             ctx.fillText(formatDate(selectedDate), 514, 416);
@@ -46,3 +46,4 @@ function formatDate(dateString) {
     const parts = dateString.split("-");
     return `${parts[2]}.${parts[1]}.${parts[0]}`;
 }
+
