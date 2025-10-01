@@ -21,7 +21,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
         img.src = 'img/akaVstupenka2025.png';
 
         img.onload = function() {
-           document.fonts.ready.then(() => {
+           document.fonts.load("36px 'Open Sans'").then(() => {
                 let canvas = document.createElement("canvas");
                 let ctx = canvas.getContext("2d");
     
@@ -48,6 +48,7 @@ function formatDate(dateString) {
     const parts = dateString.split("-");
     return `${parts[2]}.${parts[1]}.${parts[0]} 19:00`;
 }
+
 
 
 
