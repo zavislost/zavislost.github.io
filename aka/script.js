@@ -22,31 +22,33 @@ document.getElementById('generate-button').addEventListener('click', function() 
 
         img.onload = function() {
            document.fonts.ready.then(() => {
-            let canvas = document.createElement("canvas");
-            let ctx = canvas.getContext("2d");
-
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-
-            ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
-            ctx.font = "normal 36px 'Open Sans'";  
-            ctx.fillStyle = "rgb(0, 0, 0)";
-            ctx.fillText(selectedTeam,222, 368);
-            ctx.font = "normal 31px 'Open Sans'";
-            selectedDate = "2025-10-02";
-            ctx.fillText(formatDate(selectedDate), 346, 416);
-
-            container.style.display = 'none';
-            outputImageDiv.src = canvas.toDataURL();
-            outputImageDiv.style.display = 'block';
-        };
-      });
+                let canvas = document.createElement("canvas");
+                let ctx = canvas.getContext("2d");
+    
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+    
+                ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+                ctx.font = "normal 36px 'Open Sans'";  
+                ctx.fillStyle = "rgb(0, 0, 0)";
+                ctx.fillText(selectedTeam,222, 368);
+                ctx.font = "normal 31px 'Open Sans'";
+                selectedDate = "2025-10-02";
+                ctx.fillText(formatDate(selectedDate), 346, 416);
+    
+                container.style.display = 'none';
+                outputImageDiv.src = canvas.toDataURL();
+                outputImageDiv.style.display = 'block';
+        });
+      };
+    }
 });
 
 function formatDate(dateString) {
     const parts = dateString.split("-");
     return `${parts[2]}.${parts[1]}.${parts[0]} 19:00`;
 }
+
 
 
 
