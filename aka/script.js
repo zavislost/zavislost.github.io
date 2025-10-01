@@ -41,13 +41,13 @@ document.getElementById('generate-button').addEventListener('click', function() 
             outputImageDiv.style.display = 'block';
         };
       });
-    }
 });
 
 function formatDate(dateString) {
     const parts = dateString.split("-");
     return `${parts[2]}.${parts[1]}.${parts[0]} 19:00`;
 }
+
 
 
 
