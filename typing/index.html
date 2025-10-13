@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Příběhové psaní — učení psaní s diakritikou</title>
+  <style>
+    :root{--bg:#f7fbff;--card:#ffffff;--muted:#6b7280;--accent:#0ea5a4;--ok:#16a34a;--bad:#ef4444}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; margin:0; background:linear-gradient(180deg,var(--bg),#eaf3f6); color:#0f172a}
+    .wrap{max-width:860px;margin:36px auto;padding:20px}
+    header{display:flex;gap:16px;align-items:center}
+    h1{font-size:1.5rem;margin:0}
+    p.lead{margin:6px 0 18px;color:var(--muted)}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(8,15,40,0.06)}
+    .story-line{font-size:1.25rem;padding:14px;border-radius:10px;background:linear-gradient(180deg,#fff,#f7fcfc);min-height:68px;display:flex;align-items:center}
+    .progress{height:12px;background:#e6eef0;border-radius:999px;overflow:hidden;margin-top:12px}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#38bdf8);width:0%}
+    .typing-area{display:flex;gap:12px;align-items:flex-start;margin-top:14px}
+    .input-wrap{flex:1}
+    .target-chars{display:flex;flex-wrap:wrap;gap:2px}
+    .char{padding:6px 6px;border-radius:6px;min-width:18px;text-align:center;font-family:monospace}
+    .char.pending{background:transparent;color:#94a3b8}
+    .char.ok{background:rgba(22,163,74,0.12);color:var(--ok);border:1px solid rgba(22,163,74,0.12)}
+    .char.bad{background:rgba(239,68,68,0.12);color:var(--bad);border:1px solid rgba(239,68,68,0.12)}
+    input[type="text"]{width:100%;padding:12px;border-radius:10px;border:1px solid #e2e8f0;font-size:1rem}
+    .meta{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:10px;border:0;cursor:pointer}
+    .btn.secondary{background:#f3f4f6;color:#0f172a}
+    .small{font-size:0.9rem;color:var(--muted)}
+    .feedback{margin-top:10px;font-weight:600}
+    .hint{margin-left:auto;font-size:0.9rem;color:var(--muted)}
+    footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
+    @media (max-width:600px){.story-line{font-size:1.05rem;padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Příběhové psaní — učení psaní s diakritikou</h1>
+        <p class="lead">Dítě čte jednoduchou větu, napíše ji dolů a každé písmeno se zbarví: zeleně = správně, červeně = špatně. Po správném napsání se posune příběh dál.</p>
+      </div>
+    </header>
+
+    <div class="card" id="app">
+      <div class="meta">
+        <div class="small">Věta <strong id="index">1</strong> / <strong id="total">10</strong></div>
+        <div class="hint">Piš přesně — i diakritika a tečky/otazníky!</div>
+      </div>
+
+      <div class="story-line" id="storyLine" aria-live="polite"></div>
+
+      <div class="typing-area">
+        <div class="input-wrap">
+          <div class="target-chars" id="targetChars" aria-hidden="true"></div>
+          <label for="typeInput" class="small" style="margin-top:8px;display:block">Napiš tu větu sem:</label>
+          <input id="typeInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        </div>
+        <div style="width:140px;text-align:center">
+          <button class="btn" id="skipBtn">Přeskočit</button>
+          <button class="btn secondary" id="resetBtn" style="margin-top:8px">Restart</button>
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="progress" aria-hidden="true">
+        <i id="bar"></i>
+      </div>
+
+      <footer>
+       
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // --- EDITABLE: uprav si věty tady (musí být v češtině, s diakritikou a interpunkcí) ---
+    const sentences = [
+    "Ráno Honzík našel pod stromem 3 červené balónky.",
+    "Zeptal se: \"Kdo to tu ztratil?\" a zvedl jeden balónek.",
+    "Balónek se odrazil a letěl až k hoře údolím.",
+    "Maminka zavolala: Honzíku, počkej na rozcestí!",
+    "Honzík napsal e-mail svému učiteli.",
+    "Učitel má e-mail panUčitel@seznam.cz ",
+    "Na konci dne si někdo píše deník. Píše si ho i Šťěpán."
+];
+    // ---------------------------------------------------------------------------------
+
+    const total = sentences.length;
+    let idx = 0;
+    const indexEl = document.getElementById('index');
+    const totalEl = document.getElementById('total');
+    const storyLine = document.getElementById('storyLine');
+    const targetChars = document.getElementById('targetChars');
+    const typeInput = document.getElementById('typeInput');
+    const feedback = document.getElementById('feedback');
+    const bar = document.getElementById('bar');
+    const skipBtn = document.getElementById('skipBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    totalEl.textContent = total;
+
+    function renderSentence() {
+      const sentence = sentences[idx];
+      indexEl.textContent = idx + 1;
+      storyLine.textContent = sentence; // show the target sentence as story text
+
+      // build character boxes
+      targetChars.innerHTML = '';
+      for (let ch of sentence) {
+        const span = document.createElement('span');
+        span.className = 'char pending';
+        span.textContent = ch === ' ' ? '\u00A0' : ch; // keep spaces visible width
+        targetChars.appendChild(span);
+      }
+
+      typeInput.value = '';
+      typeInput.focus();
+      feedback.textContent = '';
+      updateProgress();
+    }
+
+    function updateProgress(){
+      const pct = Math.round((idx / (total-1)) * 100);
+      bar.style.width = pct + '%';
+    }
+
+    function compareInput() {
+      const sentence = sentences[idx];
+      const typed = typeInput.value;
+      const spans = targetChars.children;
+
+      // compare character-by-character
+      for (let i = 0; i < spans.length; i++){
+        const targetChar = sentence[i] || '';
+        const typedChar = typed[i] || '';
+
+        // normalize only for comparison? we match exact to teach diacritics, so don't normalize
+        if (!typedChar) {
+          spans[i].className = 'char pending';
+        } else if (typedChar === targetChar) {
+          spans[i].className = 'char ok';
+        } else {
+          spans[i].className = 'char bad';
+        }
+      }
+
+      // if typed is longer than sentence, show extra red boxes
+      if (typed.length > sentence.length) {
+        feedback.textContent = 'Máš navíc znaky — smaž přebytek.';
+      } else {
+        feedback.textContent = '';
+      }
+
+      // check completion: exact match
+      if (typed === sentence) {
+        feedback.textContent = 'Skvěle — věta napsaná správně!';
+        setTimeout(() => nextSentence(), 650);
+      }
+    }
+
+    function nextSentence(){
+      if (idx < total - 1) {
+        idx++;
+        renderSentence();
+      } else {
+        // finished
+        feedback.textContent = 'Gratulace — dokončili jsme celý příběh!';
+        bar.style.width = '100%';
+        typeInput.blur();
+      }
+    }
+
+    skipBtn.addEventListener('click', ()=>{
+      // allow skip to next sentence (but it's better to practice)
+      if (idx < total - 1) {
+        idx++;
+        renderSentence();
+      }
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      idx = 0;
+      renderSentence();
+    });
+
+    typeInput.addEventListener('input', ()=>compareInput());
+
+    // keyboard shortcut: Enter tries completion, but we rely on live matching
+    typeInput.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (typeInput.value === sentences[idx]) nextSentence();
+      }
+    });
+
+    // initialize
+    renderSentence();
+
+    // Accessibility: allow clicking on target chars to focus input
+    targetChars.addEventListener('click', ()=>typeInput.focus());
+  </script>
+</body>
+</html>
