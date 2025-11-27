@@ -33,7 +33,7 @@ document.getElementById('generate-button').addEventListener('click', function() 
                 ctx.fillStyle = "rgb(0, 0, 0)";
                 ctx.fillText(selectedTeam,222, 368);
                 ctx.font = "normal 31px 'Open Sans'";
-                selectedDate = "2025-10-15";
+                selectedDate = "2025-11-27";
                 ctx.fillText(formatDate(selectedDate), 346, 416);
     
                 container.style.display = 'none';
@@ -48,6 +48,7 @@ function formatDate(dateString) {
     const parts = dateString.split("-");
     return `${parts[2]}.${parts[1]}.${parts[0]} 19:00`;
 }
+
 
 
 
