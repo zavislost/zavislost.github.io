@@ -1,0 +1,430 @@
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+  }
+
+body {
+  overflow-y: auto;
+  scrollbar-width: none;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #F9F6F2;
+}
+body::-webkit-scrollbar { display: none; }
+
+/* ── Hlavní obsah ── */
+#main {
+  padding-right: 280px;
+  transition: padding-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#main.collapsed { padding-right: 48px; }
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-text {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  color: #fff;
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+}
+
+.about {
+  padding: 10% 10%;
+  margin: 0 auto;
+}
+.about h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: #111;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+.about p {
+  font-size: 1rem;
+  color: #111;
+  line-height: 2;
+  text-align: justify;
+}
+
+/*------dokumenty----*/
+.downloads {
+  padding: 10% 10%;
+  position: relative;
+  background-image: url('assets/documents-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+.downloads::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(249, 246, 242, 0.88);
+}
+.downloads h2,
+.doc-grid {
+  position: relative;
+  z-index: 1;
+}
+.downloads h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 2rem;
+}
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.doc-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  border-radius: 4px;
+  background: rgba(249, 246, 242, 0.65);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  gap: 6px;
+}
+.doc-card:hover { transform: translateY(-3px); }
+.doc-card i {
+  display: block;
+  margin-bottom: 4px;
+}
+.doc-card i img {
+  width: 32px;
+  height: 32px;
+}
+.doc-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.doc-desc {
+  display: block;
+  font-size: 12px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* ---dogres odkaz-----*/
+.membership {
+  padding: 10% 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.membership h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: #111;
+}
+.membership p {
+  font-size: 1rem;
+  color: #111;
+  line-height: 2;
+  max-width: 60ch;
+}
+.membership-btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: #111;
+  color: #F9F6F2;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-radius: 2px;
+  align-self: flex-start;
+  transition: opacity 0.2s ease;
+}
+.membership-btn:hover { opacity: 0.75; }
+
+/*----rozhodci--*/
+.judges {
+  padding: 10% 10%;
+  position: relative;
+  background-image: url('assets/documents-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+.judges::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(249, 246, 242, 0.88);
+}
+.judges h2,
+.judge-grid {
+  position: relative;
+  z-index: 1;
+}
+.judges h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 2rem;
+}
+.judge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.judge-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  border-radius: 4px;
+  background: rgba(249, 246, 242, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  gap: 6px;
+}
+.judge-card i {
+  display: block;
+  margin-bottom: 4px;
+}
+.judge-card i img {
+  width: 32px;
+  height: 32px;
+}
+.judge-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.judge-cert {
+  display: block;
+  font-size: 12px;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.judge-contact {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* --galerie --- */
+.gallery {
+  padding: 10% 10%;
+}
+.gallery h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 2rem;
+}
+.gallery-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-img {
+  height: 260px;
+  width: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+.gallery-img:hover { opacity: 0.85; }
+
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#lightbox.active { display: flex; }
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+/*------kontakty a footer--*/
+.contact {
+  padding: 10% 10%;
+  background-color: antiquewhite;
+}
+.contact h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 2rem;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2.5rem;
+}
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contact-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin-bottom: 6px;
+}
+.contact-value {
+  font-size: 14px;
+  color: #111;
+  line-height: 1.6;
+}
+
+.footer {
+  padding: 1.5rem 10%;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-size: 12px;
+  color: #989696;
+  font-weight: bold;
+  background-color: #262626;
+}
+
+
+/* ── Pravý panel ── */
+#sidebar {
+  width: 280px;
+  background: #fff;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+#sidebar.closed { width: 48px; }
+
+/* ── Hamburger ── */
+#hamburger {
+  position: fixed;
+  top: 14px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 200;
+  width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Facebook ── */
+#fb-icon {
+  position: fixed;
+  bottom: 14px;
+  right: 5px;
+  z-index: 200;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Nav odkazy ── */
+#nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 1.8rem;
+  width: 100%;
+  white-space: nowrap;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+#sidebar.closed #nav {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#nav a {
+  text-decoration: none;
+  color: #111;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+}
+#nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: #111;
+  transition: width 0.25s ease;
+}
+#nav a:hover::after { width: 100%; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  #main { padding-right: 48px; }
+  #main.collapsed { padding-right: 48px; }
+
+  #sidebar { width: 48px; }
+  #sidebar.open { width: 70vw; }
+
+  #sidebar:not(.open) #nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
